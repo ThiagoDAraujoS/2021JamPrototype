@@ -25,6 +25,14 @@ public class @InputMap : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Jump"",
+                    ""type"": ""Button"",
+                    ""id"": ""b4b0c3c3-f47c-4f8e-bbff-2987aa8f92fb"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -137,6 +145,17 @@ public class @InputMap : IInputActionCollection, IDisposable
                     ""action"": ""Walk"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""deff43bc-c582-486d-990d-8fc3a8d3d3a6"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -146,6 +165,7 @@ public class @InputMap : IInputActionCollection, IDisposable
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Walk = m_Player.FindAction("Walk", throwIfNotFound: true);
+        m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -196,11 +216,13 @@ public class @InputMap : IInputActionCollection, IDisposable
     private readonly InputActionMap m_Player;
     private IPlayerActions m_PlayerActionsCallbackInterface;
     private readonly InputAction m_Player_Walk;
+    private readonly InputAction m_Player_Jump;
     public struct PlayerActions
     {
         private @InputMap m_Wrapper;
         public PlayerActions(@InputMap wrapper) { m_Wrapper = wrapper; }
         public InputAction @Walk => m_Wrapper.m_Player_Walk;
+        public InputAction @Jump => m_Wrapper.m_Player_Jump;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -213,6 +235,9 @@ public class @InputMap : IInputActionCollection, IDisposable
                 @Walk.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnWalk;
                 @Walk.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnWalk;
                 @Walk.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnWalk;
+                @Jump.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
+                @Jump.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
+                @Jump.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -220,6 +245,9 @@ public class @InputMap : IInputActionCollection, IDisposable
                 @Walk.started += instance.OnWalk;
                 @Walk.performed += instance.OnWalk;
                 @Walk.canceled += instance.OnWalk;
+                @Jump.started += instance.OnJump;
+                @Jump.performed += instance.OnJump;
+                @Jump.canceled += instance.OnJump;
             }
         }
     }
@@ -227,5 +255,6 @@ public class @InputMap : IInputActionCollection, IDisposable
     public interface IPlayerActions
     {
         void OnWalk(InputAction.CallbackContext context);
+        void OnJump(InputAction.CallbackContext context);
     }
 }
