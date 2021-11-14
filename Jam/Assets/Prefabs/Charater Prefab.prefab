@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 378525499133097393}
   - component: {fileID: 378525499133097391}
   - component: {fileID: 378525499133097390}
+  - component: {fileID: 3219752582478035308}
   - component: {fileID: 378525499133097392}
-  - component: {fileID: 1678525452}
   m_Layer: 0
   m_Name: Charater Prefab
   m_TagString: Untagged
@@ -48,6 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9dc29c1f244428c448e71bd83d52f29d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerCamera: {fileID: 0}
 --- !u!114 &378525499133097391
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -60,6 +61,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec58ed039813c5445afac196578cb914, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  controlScheme: 0
 --- !u!114 &378525499133097390
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -72,11 +74,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7af962b4de8e3b4e85c8e89c322b39c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkSpeedLimit: 8
-  walkSpeedScale: 4
-  jumpForce: 1
+  walkSpeedLimit: 22
+  walkSpeedScale: 16
+  jumpForce: 100
   groundingDistance: 0.15
   groundingSpacing: 0.1
+--- !u!114 &3219752582478035308
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 378525499133097397}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39ef9c55e7a76d845a760313389512d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!50 &378525499133097392
 Rigidbody2D:
   serializedVersion: 4
@@ -90,140 +104,14 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 30
-  m_LinearDrag: 1
+  m_LinearDrag: 3
   m_AngularDrag: 0.05
   m_GravityScale: 1
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
---- !u!114 &1678525452
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 378525499133097397}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: 46f3a340daf750742873577436fca84d, type: 3}
-  m_NotificationBehavior: 2
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ActionEvents:
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 378525499133097391}
-        m_TargetAssemblyTypeName: Actor.Player.Control, Assembly-CSharp
-        m_MethodName: Walk
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: bf912613-f8a2-4496-b46a-eeee94cf0138
-    m_ActionName: Player/Walk[/Keyboard/a,/Keyboard/d]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 378525499133097391}
-        m_TargetAssemblyTypeName: Actor.Player.Control, Assembly-CSharp
-        m_MethodName: Jump
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: b4b0c3c3-f47c-4f8e-bbff-2987aa8f92fb
-    m_ActionName: Player/Jump[/Keyboard/space]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 378525499133097391}
-        m_TargetAssemblyTypeName: Actor.Player.Control, Assembly-CSharp
-        m_MethodName: Boost
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: da9ef02f-6177-4927-a4d4-ae874bc9ffbb
-    m_ActionName: Player/Boost[/Keyboard/i]
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 378525499133097391}
-        m_TargetAssemblyTypeName: Actor.Player.Control, Assembly-CSharp
-        m_MethodName: Sling
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 15a77e5f-1a54-4a8f-9933-7873633c56da
-    m_ActionName: Player/Sling
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 378525499133097391}
-        m_TargetAssemblyTypeName: Actor.Player.Control, Assembly-CSharp
-        m_MethodName: Whip
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: bbfc0284-a4c1-44ff-9df5-e320ea90f3e6
-    m_ActionName: Player/Whip
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 378525499133097391}
-        m_TargetAssemblyTypeName: Actor.Player.Control, Assembly-CSharp
-        m_MethodName: WhipAim
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 393079ac-16c6-4603-b9db-6aa17639ca69
-    m_ActionName: Player/Whip Aim[/Mouse/position]
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: Keyboard and Mouse
-  m_DefaultActionMap: Player
-  m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
 --- !u!1 &378525499821329712
 GameObject:
   m_ObjectHideFlags: 0

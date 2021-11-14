@@ -1,7 +1,6 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using Debug = System.Diagnostics.Debug;
 
 namespace Actor.Player {
 
@@ -47,8 +46,9 @@ namespace Actor.Player {
         public void OnWhipAimMouse(InputAction.CallbackContext ctx) {
             Vector2 mousePosition = ctx.ReadValue<Vector2>();
             Debug.Assert(Camera.main != null, "Camera.main != null");
-            whipAim = (mousePosition - (Vector2)Camera.main.WorldToScreenPoint(PhysicsTransform.position)).normalized;
+            whipAim = ((Vector2)(PlayerCamera.ScreenToWorldPoint(mousePosition) - PhysicsTransform.position)).normalized;
         }
+
 
         public void OnWhipAimGamepad(InputAction.CallbackContext ctx) {
             whipAim = ctx.ReadValue<Vector2>();
@@ -59,12 +59,13 @@ namespace Actor.Player {
             inputMap = new InputMap();
         }
 
-        private void Update() {
+        private void FixedUpdate() {
             if (moveAxis != 0)
                 Motion.Move(moveAxis);
         }
 
         private void OnEnable() {
+            inputMap.Enable();
             inputMap.Player.Walk.performed  += OnWalk;
             inputMap.Player.Walk.canceled   += OnStop;
             inputMap.Player.Jump.performed  += OnJump;
@@ -90,6 +91,13 @@ namespace Actor.Player {
                 ControlSchemeEnum.Gamepad          => OnWhipAimGamepad,
                 _                                  => throw new ArgumentOutOfRangeException()
             };
+            inputMap.Disable();
+        }
+        //draws whip aim line
+        private void OnDrawGizmos() {
+            if (whipAim == Vector2.zero) return;
+            Gizmos.color = Color.red;
+            Gizmos.DrawRay(PhysicsTransform.position, whipAim*0.3f);
         }
     }
 }

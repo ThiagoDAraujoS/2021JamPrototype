@@ -63,7 +63,7 @@ public class @InputMap : IInputActionCollection, IDisposable
                     ""type"": ""Value"",
                     ""id"": ""393079ac-16c6-4603-b9db-6aa17639ca69"",
                     ""expectedControlType"": ""Vector2"",
-                    ""processors"": ""StickDeadzone"",
+                    ""processors"": """",
                     ""interactions"": """"
                 }
             ],
@@ -181,7 +181,7 @@ public class @InputMap : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""84443191-80f2-41d8-84c2-d12ab33e6226"",
-                    ""path"": """",
+                    ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard and Mouse"",
@@ -205,7 +205,7 @@ public class @InputMap : IInputActionCollection, IDisposable
                     ""id"": ""7cccf3fd-502f-4ff4-b7f8-9ba6d18f5d93"",
                     ""path"": ""2DVector"",
                     ""interactions"": """",
-                    ""processors"": """",
+                    ""processors"": ""StickDeadzone"",
                     ""groups"": """",
                     ""action"": ""Whip Aim"",
                     ""isComposite"": true,
