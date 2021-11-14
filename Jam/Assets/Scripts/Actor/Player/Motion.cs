@@ -39,12 +39,17 @@ namespace Actor.Player {
             }
         }
 
+        public void Boost() {
+            
+        }
+
         private void OnDrawGizmos() {
-            if(Master == null) return;
+            //if(Master == null) return;
             Gizmos.color = Color.green;
-            Vector3 position = PhysicsTransform.position;
+            Vector3 position = transform.Find("Physics").position;
             Gizmos.DrawRay(position + Vector3.left  * groundingSpacing, Vector3.down * groundingDistance);
             Gizmos.DrawRay(position + Vector3.right * groundingSpacing, Vector3.down * groundingDistance);
         }
+        
     }
 }
