@@ -1,19 +1,10 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+// ReSharper disable MemberHidesStaticFromOuterClass
 
 namespace Actor.Player {
     public class Facade : MonoBehaviour {
-        public static Rigidbody2D Rb               => Instance.rb;
-        public static Control     Control          => Instance.control;
-        public static Motion      Motion           => Instance.motion;
-        public static Whip        Whip             => Instance.whip;
-        public static Transform   PhysicsTransform => Instance.physicsTransform;
-        public static PlayerInput PlayerInput      => Instance.playerInput;
-        public static Camera      PlayerCamera     => Instance.playerCamera;
-
-
-        //--------------------------------------------------------------------------------------------------------------
-        private static Facade Instance;
+        private static Facade instance;
 
         [SerializeField] private Camera playerCamera;
 
@@ -23,12 +14,14 @@ namespace Actor.Player {
         private Whip        whip;
         private Transform   physicsTransform;
         private PlayerInput playerInput;
+        private Transform   whipCollider;
+        
 
         public void Awake() {
-            if (Instance != null)
+            if (instance != null)
                 Destroy(gameObject);
             else {
-                Instance    = this;
+                instance    = this;
                 rb          = GetComponent<Rigidbody2D>();
                 control     = GetComponent<Control>();
                 motion      = GetComponent<Motion>();
@@ -36,18 +29,20 @@ namespace Actor.Player {
                 playerInput = GetComponent<PlayerInput>();
 
                 physicsTransform = transform.Find("Physics");
+                whipCollider     = transform.Find("WhipCollider");
             }
         }
 
         public class Managed : MonoBehaviour {
-            public static    Facade      Master           => Instance;
-            protected static Rigidbody2D Rb               => Facade.Rb;
-            protected static Control     Control          => Facade.Control;
-            protected static Motion      Motion           => Facade.Motion;
-            protected static Whip        Whip             => Facade.Whip;
-            protected static Transform   PhysicsTransform => Facade.PhysicsTransform;
-            protected static PlayerInput PlayerInput      => Facade.PlayerInput;
-            protected static Camera      PlayerCamera     => Facade.PlayerCamera;
+            public static    Facade      Master           => instance;
+            protected static Rigidbody2D Rb               => instance.rb;
+            protected static Control     Control          => instance.control;
+            protected static Motion      Motion           => instance.motion;
+            protected static Whip        Whip             => instance.whip;
+            protected static Transform   PhysicsTransform => instance.physicsTransform;
+            protected static PlayerInput PlayerInput      => instance.playerInput;
+            protected static Camera      PlayerCamera     => instance.playerCamera;
+            protected static Transform   WhipCollider     => instance.whipCollider;
         }
     }
 }

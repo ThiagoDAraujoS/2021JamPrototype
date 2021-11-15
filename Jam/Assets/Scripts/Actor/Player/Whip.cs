@@ -5,6 +5,7 @@ namespace Actor.Player {
     {
         public void Fire(Vector2 direction)
         {
+            
         }
 
         public void Sling() 

@@ -34,8 +34,7 @@ namespace Actor.Player {
 
         private float   moveAxis;
         private Vector2 whipAim;
-
-
+        
         private void OnWalk(InputAction.CallbackContext  ctx) => moveAxis = ctx.ReadValue<float>();
         private void OnStop(InputAction.CallbackContext  ctx) => moveAxis = 0.0f;
         private void OnJump(InputAction.CallbackContext  ctx) => Motion.Jump();
