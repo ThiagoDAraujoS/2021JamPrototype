@@ -12,9 +12,12 @@ namespace Actor.Player {
         private Control     control;
         private Motion      motion;
         private Whip        whip;
-        private Transform   physicsTransform;
         private PlayerInput playerInput;
-        private Transform   whipCollider;
+
+        [SerializeField] 
+        private Transform
+            physicsTransform,
+            whipCollider;
         
 
         public void Awake() {
@@ -22,14 +25,11 @@ namespace Actor.Player {
                 Destroy(gameObject);
             else {
                 instance    = this;
-                rb          = GetComponent<Rigidbody2D>();
+                rb          = GetComponentInChildren<Rigidbody2D>();
                 control     = GetComponent<Control>();
                 motion      = GetComponent<Motion>();
-                whip        = GetComponent<Whip>();
+                whip        = GetComponentInChildren<Whip>();
                 playerInput = GetComponent<PlayerInput>();
-
-                physicsTransform = transform.Find("Physics");
-                whipCollider     = transform.Find("WhipCollider");
             }
         }
 

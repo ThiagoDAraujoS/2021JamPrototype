@@ -42,18 +42,15 @@ namespace Actor.Player {
         private void OnSling(InputAction.CallbackContext ctx) => Whip.Sling();
         private void OnWhip(InputAction.CallbackContext  ctx) => Whip.Fire(whipAim);
 
-        public void OnWhipAimMouse(InputAction.CallbackContext ctx) {
+        private void OnWhipAimMouse(InputAction.CallbackContext ctx) {
             Vector2 mousePosition = ctx.ReadValue<Vector2>();
             Debug.Assert(Camera.main != null, "Camera.main != null");
             whipAim = ((Vector2)(PlayerCamera.ScreenToWorldPoint(mousePosition) - PhysicsTransform.position)).normalized;
         }
 
 
-        public void OnWhipAimGamepad(InputAction.CallbackContext ctx) {
-            whipAim = ctx.ReadValue<Vector2>();
-        }
-
-
+        private void OnWhipAimGamepad(InputAction.CallbackContext ctx) => whipAim = ctx.ReadValue<Vector2>();
+        
         public void Awake() {
             inputMap = new InputMap();
         }
@@ -85,11 +82,12 @@ namespace Actor.Player {
             inputMap.Player.Boost.performed -= OnBoost;
             inputMap.Player.Sling.performed -= OnSling;
             inputMap.Player.Whip.performed  -= OnWhip;
-            inputMap.Player.WhipAim.performed += controlScheme switch {
+            inputMap.Player.WhipAim.performed -= controlScheme switch {
                 ControlSchemeEnum.KeyboardAndMouse => OnWhipAimMouse,
                 ControlSchemeEnum.Gamepad          => OnWhipAimGamepad,
                 _                                  => throw new ArgumentOutOfRangeException()
             };
+            
             inputMap.Disable();
         }
         //draws whip aim line

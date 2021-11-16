@@ -23,6 +23,10 @@ namespace Actor.Player {
                 Rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         }
 
+        public void Boost() {
+            
+        }
+        
         private bool IsGrounded {
             get {
                 RaycastHit2D hit = Physics2D.Raycast(
@@ -39,14 +43,10 @@ namespace Actor.Player {
             }
         }
 
-        public void Boost() {
-            
-        }
-
         private void OnDrawGizmos() {
-            //if(Master == null) return;
+            if (Master == null) return;
             Gizmos.color = Color.green;
-            Vector3 position = transform.Find("Physics").position;
+            Vector3 position = PhysicsTransform.position;
             Gizmos.DrawRay(position + Vector3.left  * groundingSpacing, Vector3.down * groundingDistance);
             Gizmos.DrawRay(position + Vector3.right * groundingSpacing, Vector3.down * groundingDistance);
         }
