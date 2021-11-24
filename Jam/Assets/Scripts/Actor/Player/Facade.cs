@@ -6,19 +6,19 @@ namespace Actor.Player {
     public class Facade : MonoBehaviour {
         private static Facade instance;
 
-        [SerializeField] private Camera playerCamera;
+        [SerializeField] 
+        private Camera playerCamera;
 
         private Rigidbody2D rb;
         private Control     control;
         private Motion      motion;
-        private Whip        whip;
+        private Grapple     grapple;
         private PlayerInput playerInput;
 
-        [SerializeField] 
+        [SerializeField]
         private Transform
-            physicsTransform,
-            whipCollider;
-        
+            physicsTransform;
+
 
         public void Awake() {
             if (instance != null)
@@ -28,21 +28,20 @@ namespace Actor.Player {
                 rb          = GetComponentInChildren<Rigidbody2D>();
                 control     = GetComponent<Control>();
                 motion      = GetComponent<Motion>();
-                whip        = GetComponentInChildren<Whip>();
+                grapple     = GetComponentInChildren<Grapple>();
                 playerInput = GetComponent<PlayerInput>();
             }
         }
 
         public class Managed : MonoBehaviour {
-            public static    Facade      Master           => instance;
+            protected static Facade      Master           => instance;
             protected static Rigidbody2D Rb               => instance.rb;
             protected static Control     Control          => instance.control;
             protected static Motion      Motion           => instance.motion;
-            protected static Whip        Whip             => instance.whip;
+            protected static Grapple     Grapple          => instance.grapple;
             protected static Transform   PhysicsTransform => instance.physicsTransform;
             protected static PlayerInput PlayerInput      => instance.playerInput;
             protected static Camera      PlayerCamera     => instance.playerCamera;
-            protected static Transform   WhipCollider     => instance.whipCollider;
         }
     }
 }

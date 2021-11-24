@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 378525499133097393}
   - component: {fileID: 1248873330908324419}
   - component: {fileID: 1333024221724883248}
+  - component: {fileID: 492407662}
   m_Layer: 3
   m_Name: Charater
   m_TagString: Untagged
@@ -48,7 +49,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerCamera: {fileID: 0}
   physicsTransform: {fileID: 7475526945848603726}
-  whipCollider: {fileID: 1929185099559135915}
 --- !u!114 &1248873330908324419
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -79,6 +79,77 @@ MonoBehaviour:
   jumpForce: 100
   groundingDistance: 0.15
   groundingSpacing: 0.1
+--- !u!114 &492407662
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 378525499133097397}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39ef9c55e7a76d845a760313389512d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  focusDistanceStrengthCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.8985308
+      value: 0.8362286
+      inSlope: 2.1031752
+      outSlope: 2.1031752
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.23730609
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: -0
+      outSlope: -0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.641162
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  grappleDistanceStrengthCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 1.6362507
+      outSlope: 1.6362507
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.027314112
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 2.2216308
+      outSlope: 2.2216308
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.022003055
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  focusOverGrappleDistance: 0.455
+  triggerCollider: {fileID: 861048097}
 --- !u!1 &390499003561611416
 GameObject:
   m_ObjectHideFlags: 0
@@ -220,9 +291,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1929185099559135915}
   - component: {fileID: 7160736294676736276}
-  - component: {fileID: 852327272304495603}
+  - component: {fileID: 861048097}
   m_Layer: 8
-  m_Name: Whip Collider
+  m_Name: Grapple Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -270,7 +341,7 @@ PolygonCollider2D:
     - - {x: 0, y: 0}
       - {x: -1, y: -1}
       - {x: 1, y: -1}
---- !u!114 &852327272304495603
+--- !u!114 &861048097
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -279,58 +350,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 5771604394341382031}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 39ef9c55e7a76d845a760313389512d8, type: 3}
+  m_Script: {fileID: 11500000, guid: 845c278d8961ba14eb3a70e46db7e637, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  focusDistanceStrengthCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 2
-      outSlope: 2
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  whipDistanceStrengthCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 2.6101031
-      outSlope: 2.6101031
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.024333717
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 3.3690546
-      outSlope: 3.3690546
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.01564318
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  focusOverWhipDistance: 0.69
+  pegs: []
 --- !u!1 &7488330542117382313
 GameObject:
   m_ObjectHideFlags: 0

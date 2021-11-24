@@ -39,17 +39,17 @@ namespace Actor.Player {
         private void OnStop(InputAction.CallbackContext  ctx) => moveAxis = 0.0f;
         private void OnJump(InputAction.CallbackContext  ctx) => Motion.Jump();
         private void OnBoost(InputAction.CallbackContext ctx) => Motion.Boost();
-        private void OnSling(InputAction.CallbackContext ctx) => Whip.Sling();
-        private void OnWhip(InputAction.CallbackContext  ctx) => Whip.Fire(whipAim);
-
+        private void OnSling(InputAction.CallbackContext ctx) => Grapple.Sling();
+        private void OnWhip(InputAction.CallbackContext  ctx) => Grapple.Fire(whipAim);
         private void OnWhipAimMouse(InputAction.CallbackContext ctx) {
             Vector2 mousePosition = ctx.ReadValue<Vector2>();
-            Debug.Assert(Camera.main != null, "Camera.main != null");
-            whipAim = ((Vector2)(PlayerCamera.ScreenToWorldPoint(mousePosition) - PhysicsTransform.position)).normalized;
+            if(PlayerCamera != null)
+                whipAim = ((Vector2)(PlayerCamera.ScreenToWorldPoint(mousePosition) - PhysicsTransform.position)).normalized;
         }
-
-
         private void OnWhipAimGamepad(InputAction.CallbackContext ctx) => whipAim = ctx.ReadValue<Vector2>();
+        
+        
+        
         
         public void Awake() {
             inputMap = new InputMap();
